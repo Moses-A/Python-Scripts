@@ -5,27 +5,28 @@
 import getopt
 import os
 import sys
-import sched
 import time
+
 
 
 def ping(inputfile):
    cwd = os.getcwd()
-   #path = (cwd+'\\'+inputfile)
-   path = (cwd+'\\'+'IP.txt')
+   path = (cwd+'\\'+inputfile)
+   #path = (cwd+'\\'+'IP.txt')
    with open(path, encoding='utf8') as f:
       data = f.read().splitlines()
 
    array_length = len(data)
+   while 1:
+      for i in range(array_length):
+         hostname = data[i]
+         response = os.system("ping -c 1" + hostname)
 
-   for i in range(array_length):
-      hostname = data[i]
-      response = os.system("ping " + hostname)
-
-      if response == 0:
-         print(hostname, 'Is Up!')
-      else:
-         print(hostname, 'Is Down!')
+         if response == 0:
+            print(hostname, 'Is Up!')
+         else:
+            print(hostname, 'Is Down!')
+      time.sleep(30)
 
 
 def main(argv):
