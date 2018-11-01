@@ -7,12 +7,23 @@ import sys, getopt
 import os
 
 
-def ping(inputFile, outputFile):
+def ping(inputFile):
    cwd = os.getcwd()
-   path = (cwd+' '+inputFile)
+   #path = (cwd+'\\'+inputFile)
+   path = (cwd+'\\'+'IP.txt')
    with open(path, encoding='utf8') as f:
-      data = f.read()
-   print(data)
+      data = f.read().splitlines()
+
+   array_length = len(data)
+
+   for i in range(array_length):
+      hostname = data[i]
+      response = os.system("ping " + hostname)
+
+      if response == 0:
+         print(hostname, 'Is Up!')
+      else:
+         print(hostname, 'Is Down!')
 
 
 def main(argv):
@@ -36,8 +47,6 @@ def main(argv):
    print ('Output file is "', outputFile)
    ping(inputFile, outputFile)
 
+
 if __name__ == "__main__":
    main(sys.argv[1:])
-
-
-
