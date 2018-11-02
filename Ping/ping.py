@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 #Written by Moses
 
 
@@ -8,25 +8,25 @@ import sys
 import time
 
 
-
 def ping(inputfile):
    cwd = os.getcwd()
-   path = (cwd+'\\'+inputfile)
+   path = (cwd+'/'+inputfile)
    #path = (cwd+'\\'+'IP.txt')
-   with open(path, encoding='utf8') as f:
+   with open(path, encoding='utf-8') as f:
       data = f.read().splitlines()
 
    array_length = len(data)
    while 1:
       for i in range(array_length):
          hostname = data[i]
-         response = os.system("ping -c 1" + hostname)
+         response = os.system("ping -c 1 " + hostname)
 
          if response == 0:
             print(hostname, 'Is Up!')
          else:
             print(hostname, 'Is Down!')
-      time.sleep(30)
+      time.sleep(15)
+    inputfile.close()
 
 
 def main(argv):
@@ -48,4 +48,4 @@ def main(argv):
 
 
 if __name__ == "__main__":
-   main(sys.argv[1:])
+    main(sys.argv[1:])
